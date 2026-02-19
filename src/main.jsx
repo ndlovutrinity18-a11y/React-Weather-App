@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './index.css'
 import "./Weather.css"
 import App from './App.jsx'
-import Weather from './Weather.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

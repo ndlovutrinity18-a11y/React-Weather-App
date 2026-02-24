@@ -1,0 +1,15 @@
+body{
+    background: linear-gradient(to top, #c471f5 0%, #fa71cd 100%);
+}
+.app-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+footer{
+    text-align: center;
+    margin:0;
+    padding: 0;
+    font-size: 14px;
+    color: white;
+}

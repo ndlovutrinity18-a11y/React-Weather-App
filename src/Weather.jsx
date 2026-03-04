@@ -1,35 +1,71 @@
-import React from "react";
+import { useState} from "react";
+import axios from "axios";
 import "./Weather.css";
+import FormattedDate from "./FormattedDate.jsx";      
+
 
 export default function Weather() {
-    return (
+const [city, setCity] = useState("Johannesburg");
+  const [weatherData, setWeatherData] = useState(null);
+  const [loaded, setLoaded] = useState(false);
 
-        <div className="weather">
-            <form>
-                <input type="text" placeholder="Type a city..." className="text-input" autoFocus />
-                <input type="submit" value="search" className="send" />
+
+  function handleResponse(response) {
+    setWeatherData({
+    temperature: response.data.temperature.current,
+      humidity: response.data.temperature.humidity,
+      wind: response.data.wind.speed,
+      city: response.data.city,
+      description: response.data.condition.description,
+      icon: response.data.condition.icon_url,
+      date: new Date(response.data.time * 1000),
+      
+    });
+    setLoaded(true);
+  }
+function search(city) {
+const apiKey="4o3f7f642638142f8fcf994tc99ba709";
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleResponse)
+}
+function handleSubmit(event) {
+  event.preventDefault();
+  search(city);
+}
+function handleCityChange(event) {
+  setCity(event.target.value);
+}
+
+   if (loaded){return (
+        <div className="Weather">
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Type a city..."
+            className="text-input"
+            onChange={handleCityChange}
+          />
+          <input type="submit" value="search" className="send" />
+        </form>
+        <h4>{weatherData.city}</h4>
         
-            </form>
-            <h4>
-                Cape Town 
-                </h4>
-                <span>🌧 12</span>°C
+        <p>
+        <FormattedDate date={weatherData.date} />
+            </p>
+        <img src={weatherData.icon} alt="weather-icon" />
+        <span>{Math.round(weatherData.temperature)}</span>°C
             <div className="row">
                 <div className="col-6">
             <ul>
-            <li>
-                Tuesday 20:00, light rain
-            </li>
-            <li>
-                Humidity:20%, Wind 30km/h
-            </li>
+        
+            <li className="text-capitalize">{weatherData.description}</li>
             </ul>
             </div>
             <div className="col-6">
             <ul>
-                <li>Precipitation: 10%</li>
-                <li>Humidity: 60%</li>
-                <li>Wind: 30km/h</li>
+                
+                <li>Humidity: {weatherData.humidity}%</li>
+                <li>Wind: {Math.round(weatherData.wind)}km/hr</li>
             </ul>
                 </div>
             </div>
@@ -110,4 +146,9 @@ export default function Weather() {
         
         </div>
     );
+    }
+else {
+    search(city);
+    return "Loading...";
+}
 }

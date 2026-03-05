@@ -32,8 +32,8 @@ form{
     font-style: italic;
     margin-bottom: 0;
 }
-span{
-    font-size: 16px;
+.current{
+    font-size: 39px;
     margin-bottom: 0;
 }
 .forecast{
@@ -54,4 +54,10 @@ position: relative;
 top: -36px;
 margin-left: 14px;
 font-size: 16px;
+}
+.unit-1{
+position: relative;
+top: -21px;
+margin-left: -14px;
+font-size: 14px;
 }

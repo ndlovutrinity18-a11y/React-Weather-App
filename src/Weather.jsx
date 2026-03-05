@@ -8,8 +8,10 @@ export default function Weather() {
 const [city, setCity] = useState("Johannesburg");
   const [weatherData, setWeatherData] = useState(null);
   const [loaded, setLoaded] = useState(false);
- let Fahrenheit= (weatherData.temperature * 9) / 5 + 32;
 
+
+      
+  
 
   function handleResponse(response) {
     setWeatherData({
@@ -54,7 +56,9 @@ function handleCityChange(event) {
         <FormattedDate date={weatherData.date} />
             </p>
         <img src={weatherData.icon} alt="weather-icon" />
-        <span>{Math.round(weatherData.temperature)}</span>°C|<span>{Math.round(Fahrenheit)}</span>°F
+        <span className="current">{Math.round(weatherData.temperature)} <span className="unit-1">°C|{""}</span>
+        {Math.round((weatherData.temperature * 9) / 5 + 32)} <span className="unit-1">°F</span>
+        </span>
             <div className="row">
                 <div className="col-6">
             <ul>

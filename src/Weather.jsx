@@ -27,7 +27,7 @@ const [city, setCity] = useState("Johannesburg");
     setLoaded(true);
   }
 function search(city) {
-const apiKey= import.meta.env.VITE_WEATHER_API_KEY;
+const apiKey= import.meta.env.VITE_SHECODES_API_KEY;
     let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
     axios.get(apiUrl).then(handleResponse)
 }

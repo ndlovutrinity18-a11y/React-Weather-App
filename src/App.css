@@ -1,5 +1,8 @@
 body{
     background: linear-gradient(to top, #c471f5 0%, #fa71cd 100%);
+    border: 1px solid #dadde1;
+    border-radius: 4px;
+    align-items: center;
 }
 .app-container{
     display: flex;
@@ -12,4 +15,9 @@ footer{
     padding: 0;
     font-size: 14px;
     color: white;
+}
+.App{
+    font-family: Arial, Helvetica, sans-serif;
+justify-content: center;
+    align-items: center;
 }

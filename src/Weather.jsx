@@ -1,7 +1,8 @@
 import { useState} from "react";
 import axios from "axios";
 import "./Weather.css";
-import FormattedDate from "./FormattedDate.jsx";      
+import FormattedDate from "./FormattedDate.jsx"; 
+import WeatherForecast from "./WeatherForecast.jsx";     
 
 
 export default function Weather() {
@@ -27,7 +28,7 @@ const [city, setCity] = useState("Johannesburg");
     setLoaded(true);
   }
 function search(city) {
-const apiKey= import.meta.env.VITE_SHECODES_API_KEY;
+const apiKey="4o3f7f642638142f8fcf994tc99ba709";
     let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
     axios.get(apiUrl).then(handleResponse)
 }
@@ -55,16 +56,18 @@ function handleCityChange(event) {
         <p>
         <FormattedDate date={weatherData.date} />
             </p>
+            <h1>Now</h1>
+            <ul>
+        
+            <li className="text-capitalize">{weatherData.description}</li>
+            </ul>
+
         <img src={weatherData.icon} alt="weather-icon" />
         <span className="current">{Math.round(weatherData.temperature)} <span className="unit-1">°C|{""}</span>
         {Math.round((weatherData.temperature * 9) / 5 + 32)} <span className="unit-1">°F</span>
         </span>
             <div className="row">
                 <div className="col-6">
-            <ul>
-        
-            <li className="text-capitalize">{weatherData.description}</li>
-            </ul>
             </div>
             <div className="col-6">
             <ul>
@@ -74,86 +77,14 @@ function handleCityChange(event) {
             </ul>
                 </div>
             </div>
-            <div className="forecast">
-            <h4>Hourly Forecast</h4>
-            <div className="row">
-                <div className="col-2">
-                    <p>20:00</p>
-                    <div className="icon">🌧</div>
-                    <div className="temperature"> 12</div> <div className="unit">°C</div>
-                </div>
-                <div className="col-2">
-                    <p>21:00</p>
-                    <div className="icon">🌧</div>
-                    <div className="temperature"> 11</div> <div className="unit">°C</div>   
-                    </div>
-                <div className="col-2">
-                    <p>22:00</p>
-                    <div className="icon">🌧</div>
-                    <div className="temperature"> 10</div> <div className="unit">°C</div>
-                </div>
-                <div className="col-2">
-                    <p>22:00</p>
-                    <div className="icon">🌧</div>
-                    <div className="temperature"> 10</div> <div className="unit">°C</div>
-                </div>
-                <div className="col-2">
-                    <p>23:00</p>
-                    <div className="icon">🌧</div>
-                    <div className="temperature"> 9</div> <div className="unit">°C</div>
-                </div>
-                <div className="col-2">
-                    <p>23:00</p>
-                    <div className="icon">🌧</div>
-                    <div className="temperature"> 9</div> <div className="unit">°C</div>
-                </div>
+            <WeatherForecast icon={weatherData.icon} />
         </div>
-        <h4>7-Day Forecast</h4>
-        <div className="row">
-            <div className="col-2">
-                <p>Today</p>
-                <div className="icon">🌧</div>
-                <div className="temperature"> 10</div> <div className="unit">°C</div>
-                </div>
-            <div className="col-2">
-                <p>Fri</p>
-                <div className="icon">🌧</div>
-                <div className="temperature"> 12</div> <div className="unit">°C</div>
-            </div>
-            <div className="col-2">
-                <p>Sat</p>
-                <div className="icon">🌧</div>
-                <div className="temperature"> 11</div> <div className="unit">°C</div>
-                </div>
-                <div className="col-2">
-                <p>Sun</p>
-                <div className="icon">🌧</div>
-                <div className="temperature"> 10</div> <div className="unit">°C</div>
-                </div>
-                <div className="col-2">
-                <p>Mon</p>
-                <div className="icon">🌧</div>
-                <div className="temperature"> 10</div> <div className="unit">°C</div>
-                </div>
-                <div className="col-2">
-                <p>Tue</p>
-                <div className="icon">🌧</div>
-                <div className="temperature"> 10</div> <div className="unit">°C</div>
-                </div>
-                <div className="col-2">
-                <p>Wed</p>
-                <div className="icon">🌧</div>
-                <div className="temperature"> 10</div> <div className="unit">°C</div>
-                </div>
-        </div>
-                
-            </div>
         
-        </div>
     );
-    }
+}
 else {
     search(city);
     return "Loading...";
 }
+    
 }

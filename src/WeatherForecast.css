@@ -2,11 +2,22 @@
     font-size: 1.5rem;
     opacity: 0.8;
     margin-bottom: 10px;
-    text-align: center;
+    
 }
 .weather-forecast {
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin-top: 20px;
+}
+span.max-temp {
+    font-weight: bold;
+    color: #ff4500;
+
+
+
+}
+span.min-temp {
+    font-weight: bold;
+    color: #1e90ff;
 }

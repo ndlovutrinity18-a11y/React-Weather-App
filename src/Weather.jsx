@@ -21,6 +21,7 @@ const [city, setCity] = useState("Johannesburg");
       wind: response.data.wind.speed,
       city: response.data.city,
       description: response.data.condition.description,
+      coordinates: response.data.coordinates,
       icon: response.data.condition.icon_url,
       date: new Date(response.data.time * 1000),
       
@@ -51,14 +52,11 @@ function handleCityChange(event) {
           />
           <input type="submit" value="search" className="send" />
         </form>
-        <h4>{weatherData.city}</h4>
-        
-        <p>
+                <h4>{weatherData.city}</h4>
+        <div>
         <FormattedDate date={weatherData.date} />
-            </p>
-            <h1>Now</h1>
+            </div>
             <ul>
-        
             <li className="text-capitalize">{weatherData.description}</li>
             </ul>
 
@@ -67,8 +65,6 @@ function handleCityChange(event) {
         {Math.round((weatherData.temperature * 9) / 5 + 32)} <span className="unit-1">°F</span>
         </span>
             <div className="row">
-                <div className="col-6">
-            </div>
             <div className="col-6">
             <ul>
                 
@@ -77,7 +73,7 @@ function handleCityChange(event) {
             </ul>
                 </div>
             </div>
-            <WeatherForecast icon={weatherData.icon} />
+            <WeatherForecast icon={weatherData.icon} coordinates={weatherData.coordinates} city={weatherData.city} />
         </div>
         
     );
